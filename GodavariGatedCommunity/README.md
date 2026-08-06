@@ -3,6 +3,14 @@
 A Java-based web application developed to simplify complaint management in a gated community. The system enables residents to register, log in, submit complaints, and track their complaint status, while administrators can manage complaints and update their progress through an admin dashboard.
 
 ---
+## 🎯 Project Objectives
+
+- Provide an easy way for residents to submit complaints.
+- Help administrators manage and resolve complaints efficiently.
+- Maintain complaint history with status tracking.
+- Reduce manual complaint handling within the community.
+
+---
 
 ## 📌 Features
 
