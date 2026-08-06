@@ -1,5 +1,7 @@
 # 🏡 Godavari Gated Community Complaint Management System
 
+This document illustrates the workflow of the complaint management system from resident registration to complaint resolution by the administrator.
+
 A Java-based web application developed to simplify complaint management in a gated community. The system enables residents to register, log in, submit complaints, and track their complaint status, while administrators can manage complaints and update their progress through an admin dashboard.
 
 ---
