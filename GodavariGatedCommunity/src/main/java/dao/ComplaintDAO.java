@@ -9,6 +9,11 @@ import org.hibernate.Transaction;
 import model.Complaint;
 import util.HibernateUtil;
 
+/**
+ * Handles database operations related to complaints,
+ * including create, update, delete, and retrieval.
+ */
+
 public class ComplaintDAO {
 	public void saveComplaint(Complaint complaint) {
 	    Transaction ts = null;
