@@ -24,13 +24,14 @@ public class ComplaintDAO {
 	        session.save(complaint);
 	        ts.commit();
 	    } catch (Exception e) {
-	        if (ts != null && ts.isActive()) {  // safer check
+	        if (ts != null && ts.isActive()) {
 	            try {
 	                ts.rollback();
 	            } catch (Exception rollbackEx) {
 	                rollbackEx.printStackTrace();
 	            }
 	        }
+	        System.err.println("Error while saving complaint.");
 	        e.printStackTrace();
 	    } finally {
 	        if (session != null && session.isOpen()) {
@@ -46,8 +47,9 @@ public class ComplaintDAO {
 	            .list();
 	        return list;
 	    } catch(Exception e) {
+	        System.err.println("Error while retrieving user complaints.");
 	        e.printStackTrace();
-	        return new ArrayList<>();  // return empty list instead of null
+	        return new ArrayList<>();
 	    }
 	}
 
@@ -57,6 +59,7 @@ public class ComplaintDAO {
 	        System.out.println("DAO: Number of complaints fetched = " + list.size());
 	        return list;
 	    } catch(Exception e) {
+	        System.err.println("Error while retrieving all complaints.");
 	        e.printStackTrace();
 	        return new ArrayList<>();
 	    }
@@ -75,17 +78,19 @@ public class ComplaintDAO {
 			ts.commit();
 		}
 		catch (Exception e) {
-	        if (ts != null) {
-	            ts.rollback();
-	        }
-	        e.printStackTrace();
-	    }
+		    if (ts != null) {
+		        ts.rollback();
+		    }
+		    System.err.println("Error while updating complaint status.");
+		    e.printStackTrace();
+		}
 	}
 	
 	public Complaint getComplaintById(int complaintId) {
 	    try(Session session = HibernateUtil.getConnection().openSession()){
 	        return session.get(Complaint.class, complaintId);
 	    } catch(Exception e) {
+	        System.err.println("Error while retrieving complaint by ID.");
 	        e.printStackTrace();
 	        return null;
 	    }
@@ -101,6 +106,7 @@ public class ComplaintDAO {
 	        if (ts != null) {
 	            ts.rollback();
 	        }
+	        System.err.println("Error while updating complaint.");
 	        e.printStackTrace();
 	    }
 	}
@@ -118,6 +124,7 @@ public class ComplaintDAO {
 	        if (ts != null) {
 	            ts.rollback();
 	        }
+	        System.err.println("Error while deleting complaint.");
 	        e.printStackTrace();
 	    }
 	}
@@ -131,6 +138,7 @@ public class ComplaintDAO {
 	            .setParameter("status", status)
 	            .list();
 	    } catch(Exception e) {
+	        System.err.println("Error while retrieving complaints by status.");
 	        e.printStackTrace();
 	        return new ArrayList<>();
 	    }
