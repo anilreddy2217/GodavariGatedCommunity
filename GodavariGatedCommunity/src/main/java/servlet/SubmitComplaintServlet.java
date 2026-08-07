@@ -24,7 +24,8 @@ public class SubmitComplaintServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
 
-	    HttpSession session = request.getSession(false);
+		// Verify user session
+		HttpSession session = request.getSession(false);
 
 	    if (session == null || session.getAttribute("userId") == null) {
 	        response.sendRedirect("index.jsp");
@@ -34,6 +35,7 @@ public class SubmitComplaintServlet extends HttpServlet {
 	    String fullName = request.getParameter("fullName");
 	    String email = request.getParameter("email");
 	    String phone = request.getParameter("phone");
+	 // Read complaint details from request
 	    String category = request.getParameter("category");
 	    String subject = request.getParameter("subject");
 	    String description = request.getParameter("description");
@@ -48,6 +50,7 @@ public class SubmitComplaintServlet extends HttpServlet {
 	    System.out.println("Session UserId: " + session.getAttribute("userId"));
 
 	    ResidentDAO dao = new ResidentDAO();
+	 // Retrieve resident information
 	    Resident resident = dao.getResident(email);
 
 	    System.out.println("Resident Object: " + resident);
@@ -63,6 +66,7 @@ public class SubmitComplaintServlet extends HttpServlet {
 	        complaint.setDescription(description);
 	        complaint.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
 
+	     // Save complaint to database
 	        ComplaintDAO cdao = new ComplaintDAO();
 	        cdao.saveComplaint(complaint);
 
