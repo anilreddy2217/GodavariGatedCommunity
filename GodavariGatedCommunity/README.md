@@ -60,6 +60,15 @@ A Java-based web application developed to simplify complaint management in a gat
 - MySQL Workbench
 
 ---
+## 📦 Software Requirements
+
+- Java JDK 17 or later
+- Apache Tomcat 10.1
+- MySQL 8.0
+- Maven 3.8 or later
+- Eclipse IDE for Enterprise Java Developers
+
+---
 
 ## 📂 Project Structure
 
