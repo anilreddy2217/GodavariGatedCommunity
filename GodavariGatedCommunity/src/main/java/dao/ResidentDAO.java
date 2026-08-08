@@ -8,7 +8,14 @@ import util.HibernateUtil;
 
 public class ResidentDAO {
 	public Resident isValid(String username, String password) {
-		try(Session session = HibernateUtil.getConnection().openSession()){
+
+	    // Validate login credentials before querying the database
+	    if (username == null || username.trim().isEmpty() ||
+	        password == null || password.trim().isEmpty()) {
+	        return null;
+	    }
+
+	    try(Session session = HibernateUtil.getConnection().openSession()){
 			Resident resident = session.createQuery("From Resident Where username=:username And password=:password", Resident.class)
 					.setParameter("username", username)
 					.setParameter("password", password)
