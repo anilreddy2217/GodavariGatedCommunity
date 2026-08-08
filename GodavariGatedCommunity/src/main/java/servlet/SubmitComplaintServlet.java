@@ -40,6 +40,19 @@ public class SubmitComplaintServlet extends HttpServlet {
 	    String subject = request.getParameter("subject");
 	    String description = request.getParameter("description");
 
+	    // Validate required complaint fields
+	    if (category == null || category.trim().isEmpty() ||
+	        subject == null || subject.trim().isEmpty() ||
+	        description == null || description.trim().isEmpty()) {
+
+	        request.setAttribute("errorMessage",
+	                "Please fill in all complaint details.");
+
+	        request.getRequestDispatcher("submitComplaint.jsp")
+	               .forward(request, response);
+	        return;
+	    }
+
 	    System.out.println("===== Submit Complaint =====");
 	    System.out.println("Full Name: " + fullName);
 	    System.out.println("Email: " + email);
