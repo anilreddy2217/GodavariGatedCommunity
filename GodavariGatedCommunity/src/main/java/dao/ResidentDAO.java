@@ -47,7 +47,13 @@ public class ResidentDAO {
 		}
 	}
 	public Resident getResident(String email) {
-		try(Session session = HibernateUtil.getConnection().openSession()){
+
+	    // Validate email before performing database lookup
+	    if (email == null || email.trim().isEmpty()) {
+	        return null;
+	    }
+
+	    try(Session session = HibernateUtil.getConnection().openSession()){
 			Resident resident = session.createQuery("From Resident Where email=:email", Resident.class)
 			.setParameter("email", email).uniqueResult();
 			return resident;
