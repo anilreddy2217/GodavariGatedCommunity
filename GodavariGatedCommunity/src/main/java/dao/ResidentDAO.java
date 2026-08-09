@@ -27,10 +27,11 @@ public class ResidentDAO {
 				return null;
 			}
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	    catch(Exception e) {
+	        System.err.println("Error while validating resident login.");
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 	public void saveResident(Resident resident) {
 		Transaction ts = null;
