@@ -41,10 +41,12 @@ public class ResidentDAO {
 			ts.commit();
 		}
 		catch(Exception e) {
-			if(ts!=null && ts.isActive()) {
-				ts.rollback();
-			}
-			e.printStackTrace();
+		    if(ts != null && ts.isActive()) {
+		        ts.rollback();
+		    }
+
+		    System.err.println("Error while saving resident information.");
+		    e.printStackTrace();
 		}
 	}
 	public Resident getResident(String email) {
