@@ -34,7 +34,14 @@ public class ResidentDAO {
 	    }
 	}
 	public void saveResident(Resident resident) {
-		Transaction ts = null;
+
+	    // Prevent invalid resident records from being persisted
+	    if (resident == null) {
+	        System.err.println("Cannot save a null resident.");
+	        return;
+	    }
+
+	    Transaction ts = null;
 		try(Session session = HibernateUtil.getConnection().openSession()){
 			ts = session.beginTransaction();
 			session.save(resident);
