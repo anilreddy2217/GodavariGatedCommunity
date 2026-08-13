@@ -68,10 +68,11 @@ public class ResidentDAO {
 			.setParameter("email", email).uniqueResult();
 			return resident;
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	    catch(Exception e) {
+	        System.err.println("Error while retrieving resident by email.");
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 	
 	public java.util.List<Resident> getAllResidents() {
