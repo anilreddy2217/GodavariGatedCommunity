@@ -80,8 +80,9 @@ public class ResidentDAO {
 			return session.createQuery("From Resident", Resident.class).list();
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			return new java.util.ArrayList<>();
+		    System.err.println("Error while retrieving all residents.");
+		    e.printStackTrace();
+		    return new java.util.ArrayList<>();
 		}
 	}
 	
