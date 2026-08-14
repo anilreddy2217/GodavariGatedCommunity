@@ -6,6 +6,10 @@ import org.hibernate.cfg.Configuration;
 import model.Complaint;
 import model.Resident;
 
+/**
+ * Utility class responsible for creating and providing
+ * the Hibernate SessionFactory used by the application.
+ */
 public class HibernateUtil {
 	static SessionFactory sessionFactory = null;
 	public static SessionFactory getConnection() {
