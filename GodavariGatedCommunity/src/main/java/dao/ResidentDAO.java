@@ -91,8 +91,9 @@ public class ResidentDAO {
 			return session.get(Resident.class, id);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			return null;
+		    System.err.println("Error while retrieving resident by ID.");
+		    e.printStackTrace();
+		    return null;
 		}
 	}
 }
