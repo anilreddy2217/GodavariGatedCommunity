@@ -12,6 +12,12 @@ import model.Resident;
  */
 public class HibernateUtil {
 	static SessionFactory sessionFactory = null;
+	/**
+	 * Provides the shared Hibernate SessionFactory instance
+	 * used to create database sessions.
+	 *
+	 * @return the configured Hibernate SessionFactory
+	 */
 	public static SessionFactory getConnection() {
 		if(sessionFactory==null) {
 			Configuration cfg = new Configuration();
