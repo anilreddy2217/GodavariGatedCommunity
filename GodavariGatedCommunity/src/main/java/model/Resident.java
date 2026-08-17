@@ -114,9 +114,14 @@ public class Resident {
 	}
 	@Override
 	public String toString() {
-		return "Resident [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", fullname=" + fullName + ", role=" + role + ", phone=" + phone + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + "]";
+	    return "Resident [id=" + id
+	            + ", username=" + username
+	            + ", email=" + email
+	            + ", fullname=" + fullName
+	            + ", role=" + role
+	            + ", phone=" + phone
+	            + ", createdAt=" + createdAt
+	            + ", updatedAt=" + updatedAt + "]";
 	}
     
 }
