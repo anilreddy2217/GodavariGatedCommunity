@@ -58,6 +58,11 @@ public class Resident {
 		this.role = role;
 		this.phone = phone;
 	}
+	/**
+	 * Returns the unique database identifier of the resident.
+	 *
+	 * @return resident ID
+	 */
 	public int getId() {
 		return id;
 	}
