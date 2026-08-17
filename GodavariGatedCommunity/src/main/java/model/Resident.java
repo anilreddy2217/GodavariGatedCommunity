@@ -11,6 +11,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="residents")
+/**
+ * Entity representing a resident registered in the gated community.
+ * Stores authentication, contact, and role information.
+ */
 public class Resident {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
