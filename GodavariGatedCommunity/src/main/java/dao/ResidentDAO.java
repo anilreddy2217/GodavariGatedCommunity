@@ -87,13 +87,18 @@ public class ResidentDAO {
 	}
 	
 	public Resident getResidentById(int id) {
-		try(Session session = HibernateUtil.getConnection().openSession()){
-			return session.get(Resident.class, id);
-		}
-		catch(Exception e) {
-		    System.err.println("Error while retrieving resident by ID.");
-		    e.printStackTrace();
-		    return null;
-		}
+
+	    // Validate resident ID before database lookup
+	    if (id <= 0) {
+	        return null;
+	    }
+
+	    try(Session session = HibernateUtil.getConnection().openSession()){
+	        return session.get(Resident.class, id);
+	    } catch(Exception e) {
+	        System.err.println("Error while retrieving resident by ID.");
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 }
