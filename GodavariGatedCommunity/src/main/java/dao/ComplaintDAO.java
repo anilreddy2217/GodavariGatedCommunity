@@ -87,6 +87,12 @@ public class ComplaintDAO {
 	}
 	
 	public Complaint getComplaintById(int complaintId) {
+
+	    // Validate complaint ID before database lookup
+	    if (complaintId <= 0) {
+	        return null;
+	    }
+
 	    try(Session session = HibernateUtil.getConnection().openSession()){
 	        return session.get(Complaint.class, complaintId);
 	    } catch(Exception e) {
