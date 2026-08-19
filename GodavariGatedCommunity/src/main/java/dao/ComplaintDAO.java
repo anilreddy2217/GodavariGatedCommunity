@@ -74,7 +74,14 @@ public class ComplaintDAO {
 
 
 	public void updateStatus(int complaintId, String status) {
-		Transaction ts = null;
+
+	    // Validate complaint ID and status before updating
+	    if (complaintId <= 0 || status == null || status.trim().isEmpty()) {
+	        System.err.println("Invalid complaint ID or status.");
+	        return;
+	    }
+
+	    Transaction ts = null;
 		try(Session session = HibernateUtil.getConnection().openSession()){
 			ts = session.beginTransaction();
 			Complaint complaint = session.get(Complaint.class, complaintId);
