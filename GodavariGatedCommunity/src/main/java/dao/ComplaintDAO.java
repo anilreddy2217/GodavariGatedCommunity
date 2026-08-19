@@ -16,6 +16,13 @@ import util.HibernateUtil;
 
 public class ComplaintDAO {
 	public void saveComplaint(Complaint complaint) {
+
+	    // Prevent invalid complaint objects from being saved
+	    if (complaint == null) {
+	        System.err.println("Cannot save a null complaint.");
+	        return;
+	    }
+
 	    Transaction ts = null;
 	    Session session = null;
 	    try {
