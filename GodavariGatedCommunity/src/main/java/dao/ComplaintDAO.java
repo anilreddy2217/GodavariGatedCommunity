@@ -133,21 +133,29 @@ public class ComplaintDAO {
 	
 	public void deleteComplaint(int complaintId) {
 	    Transaction ts = null;
+
 	    try(Session session = HibernateUtil.getConnection().openSession()){
 	        ts = session.beginTransaction();
+
 	        Complaint complaint = session.get(Complaint.class, complaintId);
+
 	        if (complaint != null) {
 	            session.delete(complaint);
+	        } else {
+	            System.out.println("Complaint not found for ID: " + complaintId);
 	        }
+
 	        ts.commit();
 	    } catch (Exception e) {
-	        if (ts != null) {
+	        if (ts != null && ts.isActive()) {
 	            ts.rollback();
 	        }
-	        System.err.println("Error while deleting complaint.");
+
+	        System.err.println("Error while deleting complaint with ID: " + complaintId);
 	        e.printStackTrace();
 	    }
 	}
+
 	
 	public List<Complaint> getAllComplaints(String status) {
 	    try(Session session = HibernateUtil.getConnection().openSession()){
