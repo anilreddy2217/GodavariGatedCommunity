@@ -118,14 +118,23 @@ public class ComplaintDAO {
 	
 	public void updateComplaint(Complaint complaint) {
 	    Transaction ts = null;
+
+	    if (complaint == null) {
+	        System.err.println("Cannot update a null complaint.");
+	        return;
+	    }
+
 	    try(Session session = HibernateUtil.getConnection().openSession()){
 	        ts = session.beginTransaction();
+
 	        session.update(complaint);
+
 	        ts.commit();
 	    } catch (Exception e) {
-	        if (ts != null) {
+	        if (ts != null && ts.isActive()) {
 	            ts.rollback();
 	        }
+
 	        System.err.println("Error while updating complaint.");
 	        e.printStackTrace();
 	    }
