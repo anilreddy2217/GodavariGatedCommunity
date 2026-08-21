@@ -99,8 +99,15 @@ public class ResidentDAO {
 	    }
 
 	    try(Session session = HibernateUtil.getConnection().openSession()){
-	        return session.get(Resident.class, id);
-	    } catch(Exception e) {
+	        Resident resident = session.get(Resident.class, id);
+
+	        if (resident == null) {
+	            System.out.println("No resident found for ID: " + id);
+	        }
+
+	        return resident;
+	    }
+	    catch(Exception e) {
 	        System.err.println("Error while retrieving resident by ID.");
 	        e.printStackTrace();
 	        return null;
