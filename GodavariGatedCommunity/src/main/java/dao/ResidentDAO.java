@@ -76,14 +76,19 @@ public class ResidentDAO {
 	}
 	
 	public java.util.List<Resident> getAllResidents() {
-		try(Session session = HibernateUtil.getConnection().openSession()){
-			return session.createQuery("From Resident", Resident.class).list();
-		}
-		catch(Exception e) {
-		    System.err.println("Error while retrieving all residents.");
-		    e.printStackTrace();
-		    return new java.util.ArrayList<>();
-		}
+	    try(Session session = HibernateUtil.getConnection().openSession()){
+	        java.util.List<Resident> residents =
+	                session.createQuery("From Resident", Resident.class).list();
+
+	        System.out.println("DAO: Number of residents fetched = " + residents.size());
+
+	        return residents;
+	    }
+	    catch(Exception e) {
+	        System.err.println("Error while retrieving all residents.");
+	        e.printStackTrace();
+	        return new java.util.ArrayList<>();
+	    }
 	}
 	
 	public Resident getResidentById(int id) {
