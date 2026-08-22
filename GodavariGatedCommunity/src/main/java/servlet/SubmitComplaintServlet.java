@@ -27,10 +27,15 @@ public class SubmitComplaintServlet extends HttpServlet {
 		// Verify user session
 		HttpSession session = request.getSession(false);
 
-	    if (session == null || session.getAttribute("userId") == null) {
-	        response.sendRedirect("index.jsp");
-	        return;
-	    }
+		if (session == null || session.getAttribute("userId") == null) {
+		    response.sendRedirect("index.jsp");
+		    return;
+		}
+
+		if (session.getAttribute("email") == null) {
+		    response.sendRedirect("index.jsp");
+		    return;
+		}
 
 	    String fullName = request.getParameter("fullName");
 	    String email = request.getParameter("email");
