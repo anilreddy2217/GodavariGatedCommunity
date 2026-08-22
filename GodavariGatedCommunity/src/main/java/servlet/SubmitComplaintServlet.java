@@ -40,6 +40,19 @@ public class SubmitComplaintServlet extends HttpServlet {
 	    String subject = request.getParameter("subject");
 	    String description = request.getParameter("description");
 
+	    // Remove unnecessary spaces from user input
+	    if (category != null) {
+	        category = category.trim();
+	    }
+
+	    if (subject != null) {
+	        subject = subject.trim();
+	    }
+
+	    if (description != null) {
+	        description = description.trim();
+	    }
+
 	    // Validate required complaint fields
 	    if (category == null || category.trim().isEmpty() ||
 	        subject == null || subject.trim().isEmpty() ||
