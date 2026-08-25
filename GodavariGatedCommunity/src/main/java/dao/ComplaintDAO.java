@@ -172,9 +172,12 @@ public class ComplaintDAO {
 	
 	public List<Complaint> getAllComplaints(String status) {
 	    try(Session session = HibernateUtil.getConnection().openSession()){
-	        if(status == null || status.isEmpty()) {
+	        if(status == null || status.trim().isEmpty()) {
 	            return session.createQuery("From Complaint", Complaint.class).list();
 	        }
+
+	        status = status.trim();
+
 	        return session.createQuery("From Complaint Where status=:status", Complaint.class)
 	            .setParameter("status", status)
 	            .list();
