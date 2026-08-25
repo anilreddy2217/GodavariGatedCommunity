@@ -47,10 +47,14 @@ public class ComplaintDAO {
 	    }
 	}
 	public List<Complaint> getComplaints(int userId, String status){
+	    if (userId <= 0 || status == null || status.trim().isEmpty()) {
+	        return new ArrayList<>();
+	    }
+
 	    try(Session session = HibernateUtil.getConnection().openSession()){
 	        List<Complaint> list = session.createQuery("From Complaint Where userId=:userId And status=:status", Complaint.class)
 	            .setParameter("userId", userId)
-	            .setParameter("status", status)
+	            .setParameter("status", status.trim())
 	            .list();
 	        return list;
 	    } catch(Exception e) {
