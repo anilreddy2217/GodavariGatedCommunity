@@ -62,7 +62,9 @@ public class Complaint {
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        if (userId > 0) {
+            this.userId = userId;
+        }
     }
 
     public String getCategory() {
