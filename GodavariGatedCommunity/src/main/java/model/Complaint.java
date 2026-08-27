@@ -94,7 +94,9 @@ public class Complaint {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        if (status != null && !status.trim().isEmpty()) {
+            this.status = status.trim();
+        }
     }
 
     public Timestamp getCreatedAt() {
