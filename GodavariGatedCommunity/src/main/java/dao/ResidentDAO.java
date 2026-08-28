@@ -59,23 +59,25 @@ public class ResidentDAO {
 	} 
 	
 	public Resident getResident(String email) { 
- 
+		 
 	    // Validate email before performing database lookup 
 	    if (email == null || email.trim().isEmpty()) { 
 	        return null; 
 	    } 
- 
+	    
+	    email = email.trim().toLowerCase();
+	 
 	    try(Session session = HibernateUtil.getConnection().openSession()){ 
-			Resident resident = session.createQuery("From Resident Where email=:email", Resident.class) 
-			.setParameter("email", email).uniqueResult(); 
-			return resident; 
-		} 
+	        Resident resident = session.createQuery("From Resident Where email=:email", Resident.class) 
+	        .setParameter("email", email).uniqueResult(); 
+	        return resident; 
+	    } 
 	    catch(Exception e) { 
 	        System.err.println("Error while retrieving resident by email."); 
 	        e.printStackTrace(); 
 	        return null; 
 	    } 
-	} 
+	}
 	 
 	public java.util.List<Resident> getAllResidents() { 
 	    try(Session session = HibernateUtil.getConnection().openSession()){ 
