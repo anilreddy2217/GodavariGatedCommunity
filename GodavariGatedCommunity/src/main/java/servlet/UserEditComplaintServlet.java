@@ -21,7 +21,21 @@ public class UserEditComplaintServlet extends HttpServlet {
 		    return;
 		}
 		
-		int complaintId = Integer.parseInt(request.getParameter("complaintId"));
+		String complaintIdParam = request.getParameter("complaintId");
+
+		if (complaintIdParam == null || complaintIdParam.trim().isEmpty()) {
+		    response.sendRedirect("viewComplaints.jsp");
+		    return;
+		}
+
+		int complaintId;
+
+		try {
+		    complaintId = Integer.parseInt(complaintIdParam);
+		} catch (NumberFormatException e) {
+		    response.sendRedirect("viewComplaints.jsp");
+		    return;
+		}
 		String category = request.getParameter("category");
 		String subject = request.getParameter("subject");
 		String description = request.getParameter("description");
