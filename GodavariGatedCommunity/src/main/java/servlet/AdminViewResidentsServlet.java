@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import model.Resident;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.ResidentDAO;
@@ -34,7 +35,16 @@ public class AdminViewResidentsServlet extends HttpServlet {
 		
 		ResidentDAO dao = new ResidentDAO();
 		List<Resident> residents = dao.getAllResidents();
+
+		if (residents == null) {
+		    residents = new ArrayList<>();
+		}
+
 		request.setAttribute("residents", residents);
-		request.getRequestDispatcher("adminViewResidents.jsp").forward(request, response);
+		request.setAttribute("residents", residents);
+		request.setAttribute("residentCount", residents.size());
+
+		request.getRequestDispatcher("adminViewResidents.jsp")
+		       .forward(request, response);
 	}
 }
