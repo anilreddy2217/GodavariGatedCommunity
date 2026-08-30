@@ -32,6 +32,12 @@ public class AdminViewResidentsServlet extends HttpServlet {
 		    response.sendRedirect("index.jsp");
 		    return;
 		}
+
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", 0);
+
+		ResidentDAO dao = new ResidentDAO();
 		
 		ResidentDAO dao = new ResidentDAO();
 		List<Resident> residents = dao.getAllResidents();
