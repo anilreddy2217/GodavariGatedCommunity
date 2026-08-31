@@ -150,6 +150,11 @@ public class ComplaintDAO {
 	 
 	public void deleteComplaint(int complaintId) { 
 	    Transaction ts = null; 
+	    
+	    if (complaintId <= 0) {
+	        System.err.println("Invalid complaint ID.");
+	        return;
+	    }
  
 	    try(Session session = HibernateUtil.getConnection().openSession()){ 
 	        ts = session.beginTransaction(); 

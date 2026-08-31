@@ -39,7 +39,7 @@ public class AdminViewResidentsServlet extends HttpServlet {
 
 		ResidentDAO dao = new ResidentDAO();
 		
-		ResidentDAO dao = new ResidentDAO();
+		
 		List<Resident> residents = dao.getAllResidents();
 
 		if (residents == null) {

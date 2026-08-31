@@ -1,6 +1,8 @@
 # 🔄 Godavari Gated Community - Complete Application Flow
 
 ## 📋 Table of Contents
+
+```
 1. [Application Start Flow](#application-start-flow)
 2. [User Registration & Login Flow](#user-registration--login-flow)
 3. [Resident Workflow](#resident-workflow)
@@ -9,6 +11,7 @@
 6. [Session Management Flow](#session-management-flow)
 
 ---
+```
 
 ## 🚀 Application Start Flow
 
