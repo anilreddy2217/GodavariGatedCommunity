@@ -68,8 +68,8 @@ public class ResidentDAO {
 	    email = email.trim().toLowerCase();
 	 
 	    try(Session session = HibernateUtil.getConnection().openSession()){ 
-	        Resident resident = session.createQuery("From Resident Where email=:email", Resident.class) 
-	        .setParameter("email", email).uniqueResult(); 
+	    	Resident resident = session.createQuery("From Resident Where email=:email", Resident.class)
+	    	        .setParameter("email", email.trim()).uniqueResult(); 
 	        return resident; 
 	    } 
 	    catch(Exception e) { 
