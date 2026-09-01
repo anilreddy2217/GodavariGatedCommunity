@@ -161,11 +161,12 @@ public class ComplaintDAO {
  
 	        Complaint complaint = session.get(Complaint.class, complaintId); 
  
-	        if (complaint != null) { 
-	            session.delete(complaint); 
-	        } else { 
-	            System.out.println("Complaint not found for ID: " + complaintId); 
-	        } 
+	        if (complaint != null) {
+	            session.delete(complaint);
+	            System.out.println("Complaint deleted successfully. ID: " + complaintId);
+	        } else {
+	            System.out.println("Complaint not found for ID: " + complaintId);
+	        }
  
 	        ts.commit(); 
 	    } catch (Exception e) { 
