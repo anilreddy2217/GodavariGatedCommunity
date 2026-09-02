@@ -93,10 +93,10 @@ public class ComplaintDAO {
 		try(Session session = HibernateUtil.getConnection().openSession()){ 
 			ts = session.beginTransaction(); 
 			Complaint complaint = session.get(Complaint.class, complaintId); 
-	        if (complaint != null) { 
-	            complaint.setStatus(status); // Update status 
-	            session.update(complaint); // Save changes 
-	        } 
+			if (complaint != null) {
+			    complaint.setStatus(status.trim());
+			    session.update(complaint);
+			}
 			ts.commit(); 
 		} 
 		catch (Exception e) { 
