@@ -96,6 +96,8 @@ public class ComplaintDAO {
 			if (complaint != null) {
 			    complaint.setStatus(status.trim());
 			    session.update(complaint);
+			} else {
+			    System.out.println("Complaint not found for ID: " + complaintId);
 			}
 			ts.commit(); 
 		} 
