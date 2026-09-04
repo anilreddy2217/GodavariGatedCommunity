@@ -45,8 +45,9 @@ public class ResidentDAO {
 	    Transaction ts = null; 
 		try(Session session = HibernateUtil.getConnection().openSession()){ 
 			ts = session.beginTransaction(); 
-			session.save(resident); 
-			ts.commit(); 
+			session.save(resident);
+			ts.commit();
+			System.out.println("Resident saved successfully: " + resident.getUsername()); 
 		} 
 		catch(Exception e) { 
 		    if(ts != null && ts.isActive()) { 
