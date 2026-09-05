@@ -96,6 +96,7 @@ public class ComplaintDAO {
 			if (complaint != null) {
 			    complaint.setStatus(status.trim());
 			    session.update(complaint);
+			    System.out.println("Complaint status updated successfully. ID: " + complaintId);
 			} else {
 			    System.out.println("Complaint not found for ID: " + complaintId);
 			}
