@@ -112,14 +112,21 @@ public class ComplaintDAO {
 	} 
 	 
 	public Complaint getComplaintById(int complaintId) { 
- 
+
 	    // Validate complaint ID before database lookup 
 	    if (complaintId <= 0) { 
 	        return null; 
 	    } 
- 
+
 	    try(Session session = HibernateUtil.getConnection().openSession()){ 
-	        return session.get(Complaint.class, complaintId); 
+	        Complaint complaint = session.get(Complaint.class, complaintId);
+
+	        if (complaint == null) {
+	            System.out.println("No complaint found for ID: " + complaintId);
+	        }
+
+	        return complaint;
+
 	    } catch(Exception e) { 
 	        System.err.println("Error while retrieving complaint by ID."); 
 	        e.printStackTrace(); 
