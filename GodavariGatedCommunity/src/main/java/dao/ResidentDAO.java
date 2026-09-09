@@ -85,8 +85,9 @@ public class ResidentDAO {
 	        java.util.List<Resident> residents = 
 	                session.createQuery("From Resident ORDER BY id", Resident.class).list(); 
  
-	        System.out.println("DAO: Number of residents fetched = " + residents.size()); 
- 
+	        if (residents.isEmpty()) {
+	            System.out.println("No residents found.");
+	        }
 	        return residents; 
 	    } 
 	    catch(Exception e) { 
