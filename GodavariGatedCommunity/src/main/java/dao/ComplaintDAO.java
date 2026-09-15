@@ -57,6 +57,11 @@ public class ComplaintDAO {
 	            .setParameter("userId", userId) 
 	            .setParameter("status", status.trim()) 
 	            .list(); 
+	        if (list.isEmpty()) {
+	            System.out.println("No complaints found for user ID: " + userId
+	                    + " with status: " + status);
+	        }
+
 	        return list; 
 	    } catch(Exception e) { 
 	        System.err.println("Error while retrieving user complaints."); 
