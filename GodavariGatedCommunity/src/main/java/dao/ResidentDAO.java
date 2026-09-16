@@ -69,9 +69,15 @@ public class ResidentDAO {
 	    email = email.trim().toLowerCase();
 	 
 	    try(Session session = HibernateUtil.getConnection().openSession()){ 
-	    	Resident resident = session.createQuery("From Resident Where email=:email", Resident.class)
-	    	        .setParameter("email", email.trim()).uniqueResult(); 
-	        return resident; 
+	    	Resident resident = session.createQuery(
+	    	        "From Resident Where email=:email", Resident.class)
+	    	        .setParameter("email", email.trim()).uniqueResult();
+
+	    	if (resident == null) {
+	    	    System.out.println("No resident found for email: " + email.trim());
+	    	}
+
+	    	return resident;
 	    } 
 	    catch(Exception e) { 
 	        System.err.println("Error while retrieving resident by email."); 
