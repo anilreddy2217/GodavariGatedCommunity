@@ -72,12 +72,13 @@ public class ComplaintDAO {
  
 	public List<Complaint> getComplaintAllUsers(){ 
 	    try(Session session = HibernateUtil.getConnection().openSession()){ 
-	        List<Complaint> list = session.createQuery(
-	                "From Complaint ORDER BY createdAt DESC", 
-	                Complaint.class)
-	            .list(); 
-	        System.out.println("DAO: Number of complaints fetched = " + list.size()); 
-	        return list; 
+	    	List<Complaint> list = session.createQuery("From Complaint", Complaint.class).list();
+
+	    	if (list.isEmpty()) {
+	    	    System.out.println("No complaints found for any user.");
+	    	}
+
+	    	return list;
 	    } catch(Exception e) { 
 	        System.err.println("Error while retrieving all complaints."); 
 	        e.printStackTrace(); 
