@@ -43,11 +43,23 @@ public class ResidentDAO {
 	    } 
  
 	    Transaction ts = null; 
-		try(Session session = HibernateUtil.getConnection().openSession()){ 
-			ts = session.beginTransaction(); 
-			session.save(resident);
-			ts.commit();
-			System.out.println("Resident saved successfully: " + resident.getUsername()); 
+	    try(Session session = HibernateUtil.getConnection().openSession()){
+	        ts = session.beginTransaction();
+
+	        Resident existingResident = session.createQuery(
+	                "From Resident Where email=:email", Resident.class)
+	                .setParameter("email", resident.getEmail().trim())
+	                .uniqueResult();
+
+	        if (existingResident != null) {
+	            System.err.println("Resident with this email already exists.");
+	            return;
+	        }
+
+	        session.save(resident);
+	        ts.commit();
+	        System.out.println("Resident saved successfully: " + resident.getUsername());
+	    }
 		} 
 		catch(Exception e) { 
 		    if(ts != null && ts.isActive()) { 
