@@ -34,55 +34,58 @@ public class ResidentDAO {
 	    } 
 	} 
 	
-	public void saveResident(Resident resident) { 
- 
-	    // Prevent invalid resident records from being persisted 
-	    if (resident == null) { 
-	        System.err.println("Cannot save a null resident."); 
-	        return; 
-	    } 
- 
-	    Transaction ts = null; 
+	public void saveResident(Resident resident) {
+	    // Prevent invalid resident records from being persisted
+	    if (resident == null) {
+	        System.err.println("Cannot save a null resident.");
+	        return;
+	    }
+
+	    Transaction ts = null;
 	    try(Session session = HibernateUtil.getConnection().openSession()){
-	    	ts = session.beginTransaction();
+	        ts = session.beginTransaction();
 
-	    	// Check duplicate email
-	    	Resident existingResident = session.createQuery(
-	    	        "From Resident Where email=:email", Resident.class)
-	    	        .setParameter("email", resident.getEmail().trim())
-	    	        .uniqueResult();
+	        // Check duplicate email
+	        Resident existingResident = session.createQuery(
+	                "From Resident Where email=:email", Resident.class)
+	                .setParameter("email", resident.getEmail().trim())
+	                .uniqueResult();
 
-	    	if (existingResident != null) {
-	    	    System.err.println("Resident with this email already exists.");
-	    	    ts.rollback();
-	    	    return;
-	    	}
+	        if (existingResident != null) {
+	            System.err.println("Resident with this email already exists.");
+	            ts.rollback();
+	            return;
+	        }
 
-	    	// Check duplicate username
-	    	Resident existingUsername = session.createQuery(
-	    	        "From Resident Where username=:username", Resident.class)
-	    	        .setParameter("username", resident.getUsername().trim())
-	    	        .uniqueResult();
+	        resident.setEmail(resident.getEmail().trim());
+	        resident.setUsername(resident.getUsername().trim());
 
-	    	if (existingUsername != null) {
-	    	    System.err.println("Resident with this username already exists.");
-	    	    ts.rollback();
-	    	    return;
-	    	}
+	        // Check duplicate username
+	        Resident existingUsername = session.createQuery(
+	                "From Resident Where username=:username", Resident.class)
+	                .setParameter("username", resident.getUsername().trim())
+	                .uniqueResult();
 
-	    	session.save(resident);
-	    	ts.commit();
-	    	System.out.println("Resident saved successfully: " + resident.getUsername());
-	    
-		} 
-		catch(Exception e) { 
-		    if(ts != null && ts.isActive()) { 
-		        ts.rollback(); 
-		    } 
- 
-		    System.err.println("Error while saving resident information."); 
-		    e.printStackTrace(); 
-		} 
+	        if (existingUsername != null) {
+	            System.err.println("Resident with this username already exists.");
+	            ts.rollback();
+	            return;
+	        }
+
+	        session.save(resident);
+	        ts.commit();
+
+	        System.out.println("Resident saved successfully: " + resident.getUsername());
+
+	    } 
+	    catch(Exception e) {
+	        if(ts != null && ts.isActive()) {
+	            ts.rollback();
+	        }
+
+	        System.err.println("Error while saving resident information.");
+	        e.printStackTrace();
+	    }
 	} 
 	
 	public Resident getResident(String email) { 
