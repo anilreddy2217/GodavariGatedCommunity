@@ -16,9 +16,10 @@ public class ResidentDAO {
 	    } 
  
 	    try(Session session = HibernateUtil.getConnection().openSession()){ 
-	    	Resident resident = session.createQuery("From Resident Where username=:username And password=:password", Resident.class)
+	    	Resident resident = session.createQuery(
+	    	        "From Resident Where username=:username And password=:password", Resident.class)
 	    	        .setParameter("username", username.trim())
-	    	        .setParameter("password", password)
+	    	        .setParameter("password", password.trim())
 	    	        .uniqueResult();
 			if(resident!=null) { 
 				return resident; 
