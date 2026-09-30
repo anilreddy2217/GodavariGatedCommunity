@@ -23,6 +23,10 @@ public class LoginServlet extends HttpServlet {
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+
+		if (username != null) {
+		    username = username.trim();
+		}
 		ResidentDAO dao = new ResidentDAO();
 		Resident resident = dao.isValid(username, password);
 		if(resident != null) {
