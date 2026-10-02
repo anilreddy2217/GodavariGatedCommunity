@@ -46,6 +46,7 @@ public class Complaint {
         this.subject = subject;
         this.description = description;
         this.status = "Pending";
+        this.createdAt = new Timestamp(System.currentTimeMillis());
     }
 
     // Getters and Setters
